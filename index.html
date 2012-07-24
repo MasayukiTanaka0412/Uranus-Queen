@@ -43,7 +43,18 @@
 			oldX = x;
 			oldY = y; 
 		}
-
+		
+		function addComment(){
+			var img_png_src = document.getElementById("canvas").toDataURL("image/png");
+			document.getElementById("commentImage").src = img_png_src;
+			clearCanvas();
+		}
+		
+		function clearCanvas(){
+			var can = document.getElementById("canvas");
+			var context = can.getContext("2d");
+			context.clearRect(0,0,600,200);
+		}
 	</script>
 </head>
 <body>
@@ -103,7 +114,10 @@
 			<div style="border: solid 1px Black; width:600px">
 				<canvas id="canvas" width="600" height="200">Canvas is not supported</canvas>
 			</div>
-			<a href="#CreateMinute" data-role="button" data-icon="arrow-r" data-iconpos="right">CreateMinute</a>
+			<a href="javascript:clearCanvas()" data-role="button" data-icon="delete" data-iconpos="left">Clear</a>
+			<a href="javascript:addComment()" data-role="button" data-icon="check" data-iconpos="left">Add Comment</a>
+			<a href="#CreateMinute" data-role="button" data-icon="arrow-r" data-iconpos="right">Create Minute</a>
+			<img id="commentImage" src="dummy"/>
 		</div>  
 		<div data-role="footer">     
 			<h4>&copy; 2012 Masayuki Tanaka</h4>   
