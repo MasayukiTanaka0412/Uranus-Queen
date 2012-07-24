@@ -35,9 +35,8 @@
 		}
 		
 		function loadEntries(){
-			//alert("loadEntries");
 			for(i=0; i < entries.length; i++){
-				$("<li></li>").html("<img src='" + entries[i][1] + "'/><br/>" + entries[i][2] + " " + entries[i][0]).appendTo("#unselectedEntries");
+				$("<li></li>").html("<img src='" + entries[i][1] + "'/><br/><a href='#' style='font-size: xx-large'><</a>" + entries[i][2] + " " + entries[i][0]).appendTo("#unselectedEntries");
 			}
 		}
 		
