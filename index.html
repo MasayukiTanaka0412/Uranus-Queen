@@ -12,6 +12,27 @@
 		var drawFlag = false; 
 		var oldX = 0; 
 		var oldY = 0;
+		var entries = new Array(); //entries[i][0] Date, entries[i][1] Comment, entries[i][2] Tag
+		var currentEntry  =0;
+		
+		var get_current_timestamp = function() {
+		    var weeks = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+		    var d = new Date();
+		    var month  = d.getMonth() + 1;
+		    var day    = d.getDate();
+		    var week   = weeks[ d.getDay() ];
+		    var hour   = d.getHours();
+		    var minute = d.getMinutes();
+		    var second = d.getSeconds();
+		 
+		    if (month < 10) {month = "0" + month;}
+		    if (day < 10) {day = "0" + day;}
+		    if (hour < 10) {hour = "0" + hour;}
+		    if (minute < 10) {minute = "0" + minute;}
+		    if (second < 10) {second = "0" + second;}
+		 
+		    return d.getFullYear()  + "/" + month + "/" + day + " (" + week + ") " + hour + ":" + minute + ":" + second;
+		}
 		
 		window.addEventListener("load", function(){     
 			var can = document.getElementById("canvas");
@@ -45,9 +66,17 @@
 		}
 		
 		function addComment(){
+			var tag =  $('input[name="Tag"]:checked').val();
+			var currentDateTime = get_current_timestamp();
 			var img_png_src = document.getElementById("canvas").toDataURL("image/png");
-			$("<li></li>").html("<img src='" + img_png_src + "'/>" ).prependTo("#entries");
+			$("<li></li>").html("<img src='" + img_png_src + "'/><br/>" + tag + " " + currentDateTime).prependTo("#entries");
 			clearCanvas();
+			
+			entries[currentEntry] = new Array(3);
+			entries[currentEntry][0] = currentDateTime;
+			entries[currentEntry][1] = img_png_src;
+			entries[currentEntry][2] = tag
+			currentEntry++;
 		}
 		
 		function clearCanvas(){
