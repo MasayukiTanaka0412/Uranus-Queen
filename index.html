@@ -46,7 +46,7 @@
 		
 		function addComment(){
 			var img_png_src = document.getElementById("canvas").toDataURL("image/png");
-			document.getElementById("commentImage").src = img_png_src;
+			$("<li></li>").html("<img src='" + img_png_src + "'/>" ).prependTo("#entries");
 			clearCanvas();
 		}
 		
@@ -114,10 +114,24 @@
 			<div style="border: solid 1px Black; width:600px">
 				<canvas id="canvas" width="600" height="200">Canvas is not supported</canvas>
 			</div>
-			<a href="javascript:clearCanvas()" data-role="button" data-icon="delete" data-iconpos="left">Clear</a>
-			<a href="javascript:addComment()" data-role="button" data-icon="check" data-iconpos="left">Add Comment</a>
+			
+			<div data-role="controlgroup" data-type="horizontal">
+				<input type="radio" name="Tag" id="tagDiscussion" value="Discussion" checked="checked" />
+		     	<label for="tagDiscussion">Discussion</label>
+
+		     	<input type="radio" name="Tag" id="tagAction" value="Action"  />
+		     	<label for="tagAction">Action</label>
+
+		     	<input type="radio" name="Tag" id="tagColclusion" value="Conclusion"  />
+		     	<label for="tagColclusion">Conclusion</label>
+			</div>
+			<br/><br/>
+			<div data-role="controlgroup" data-type="horizontal">
+				<a href="javascript:addComment()" data-role="button" data-icon="check" data-iconpos="left">Add Comment</a>
+				<a href="javascript:clearCanvas()" data-role="button" data-icon="delete" data-iconpos="left">Clear</a>
+			</div>
 			<a href="#CreateMinute" data-role="button" data-icon="arrow-r" data-iconpos="right">Create Minute</a>
-			<img id="commentImage" src="dummy"/>
+			<ul id="entries" data-role="listview"></ul>
 		</div>  
 		<div data-role="footer">     
 			<h4>&copy; 2012 Masayuki Tanaka</h4>   
