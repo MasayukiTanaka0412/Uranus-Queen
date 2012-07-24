@@ -34,6 +34,15 @@
 		    return d.getFullYear()  + "/" + month + "/" + day + " (" + week + ") " + hour + ":" + minute + ":" + second;
 		}
 		
+		function loadEntries(){
+			//alert("loadEntries");
+			for(i=0; i < entries.length; i++){
+				$("<li></li>").html("<img src='" + entries[i][1] + "'/><br/>" + entries[i][2] + " " + entries[i][0]).appendTo("#unselectedEntries");
+			}
+		}
+		
+		$("#CreateMinute").live("pageinit", loadEntries);
+		
 		window.addEventListener("load", function(){     
 			var can = document.getElementById("canvas");
 			can.addEventListener("mousemove", draw, true); 
@@ -179,7 +188,8 @@
 					Minute
 				</div>
 				<div class="ui-block-b">
-					Entries
+					Entries<br/>
+					<ul id="unselectedEntries" data-role="listview"></ul>
 				</div>
 			</div>
 		</div>   
