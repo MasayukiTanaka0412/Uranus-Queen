@@ -9,7 +9,41 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<script>
-	
+		var drawFlag = false; 
+		var oldX = 0; 
+		var oldY = 0;
+		
+		window.addEventListener("load", function(){     
+			var can = document.getElementById("canvas");
+			can.addEventListener("mousemove", draw, true); 
+			can.addEventListener("mousedown", function(e){
+				drawFlag = true;
+				var rect = e.target.getBoundingClientRect();
+				oldX = e.clientX  - rect.left;
+				oldY = e.clientY  - rect.top;}, false);
+			can.addEventListener("mouseup", function(){
+				drawFlag = false;
+				}, false);
+			}, true); 
+		
+		function draw(e){
+			if (!drawFlag) return;
+			var rect = e.target.getBoundingClientRect();
+			var x = e.clientX - rect.left;
+			var y = e.clientY - rect.top;
+			var can = document.getElementById("canvas");
+			var context = can.getContext("2d");
+			context.strokeStyle  = "#000000";
+			context.lineWidth = 1;    
+			context.beginPath();
+			context.moveTo(oldX, oldY);
+			context.lineTo(x, y);
+			context.stroke();
+			context.closePath();
+			oldX = x;
+			oldY = y; 
+		}
+
 	</script>
 </head>
 <body>
@@ -65,7 +99,10 @@
 		</div>   
 		
 		<div data-role="content">
-		TBD
+		Write Comment here
+			<div style="border: solid 1px Black; width:600px">
+				<canvas id="canvas" width="600" height="200">Canvas is not supported</canvas>
+			</div>
 			<a href="#CreateMinute" data-role="button" data-icon="arrow-r" data-iconpos="right">CreateMinute</a>
 		</div>  
 		<div data-role="footer">     
