@@ -45,7 +45,7 @@
 		
 		function loadEntries(){
 			for(i=0; i < entries.length; i++){
-				var entryhtml = '<div id="' + entries[i][3] + '"><img src="' + entries[i][1] + '"/><br/><a href="javascript:addToMinute(\'' + entries[i][3] + '\')" style="font-size: xx-large"><</a>' + entries[i][2] + ' ' + entries[i][0] + '</div>'
+				var entryhtml = '<hr/><div id="' + entries[i][3] + '"><img src="' + entries[i][1] + '"/><br/><a href="javascript:addToMinute(\'' + entries[i][3] + '\')" style="font-size: xx-large"><</a>' + entries[i][2] + ' ' + entries[i][0] + '</div>'
 				$("<li></li>").html(entryhtml).appendTo("#unselectedEntries");
 			}
 		}
@@ -53,7 +53,7 @@
 		function refreshMinute(){
 			$("#selectedEntries").empty();
 			for(i=0; i < minute.length; i++){
-				var entryhtml = '<div id="minute-' + minute[i][3] + '"><img src="' + minute[i][1] + '"/><br/>' + minute[i][2] + ' ' + minute[i][0] + '</div>'
+				var entryhtml = '<hr/><div id="minute-' + minute[i][3] + '">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Up</a>&nbsp;&nbsp;<a href="#">Down</a><br/><img src="' + minute[i][1] + '"/><br/>&nbsp;&nbsp;&nbsp;&nbsp;' + minute[i][2] + ' ' + minute[i][0] + '</div>'
 				$("<li></li>").html(entryhtml).appendTo("#selectedEntries");
 			}
 		}
@@ -114,7 +114,6 @@
 		}
 		
 		function addToMinute(entryid){
-			alert(entryid);
 			$("#" + entryid).hide();
 			copyEntryDataToMinute(entryid);
 			refreshMinute();
@@ -224,12 +223,14 @@
 		<div data-role="content">     
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
-					Minute
+					Minute<br/><br/><br/>
 					<ul id="selectedEntries" data-role="listview"></ul>
+					<br/><br/><br/>
 				</div>
 				<div class="ui-block-b">
-					Entries<br/>
+					Entries<br/><br/><br/>
 					<ul id="unselectedEntries" data-role="listview"></ul>
+					<br/><br/><br/>
 				</div>
 			</div>
 		</div>   
