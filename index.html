@@ -13,6 +13,7 @@
 		var oldX = 0; 
 		var oldY = 0;
 		var entries = new Array(); //entries[i][0] Date, entries[i][1] Comment, entries[i][2] Tag, entries[i][3] Entry ID
+		var minute = new Array();
 		var currentEntry  =0;
 		
 		var get_current_timestamp = function() {
@@ -44,7 +45,16 @@
 		
 		function loadEntries(){
 			for(i=0; i < entries.length; i++){
-				$("<li></li>").html("<img src='" + entries[i][1] + "'/><br/><a href='#' style='font-size: xx-large'><</a>" + entries[i][2] + " " + entries[i][0]).appendTo("#unselectedEntries");
+				var entryhtml = '<div id="' + entries[i][3] + '"><img src="' + entries[i][1] + '"/><br/><a href="javascript:addToMinute(\'' + entries[i][3] + '\')" style="font-size: xx-large"><</a>' + entries[i][2] + ' ' + entries[i][0] + '</div>'
+				$("<li></li>").html(entryhtml).appendTo("#unselectedEntries");
+			}
+		}
+		
+		function refreshMinute(){
+			$("#selectedEntries").empty();
+			for(i=0; i < minute.length; i++){
+				var entryhtml = '<div id="minute-' + minute[i][3] + '"><img src="' + minute[i][1] + '"/><br/>' + minute[i][2] + ' ' + minute[i][0] + '</div>'
+				$("<li></li>").html(entryhtml).appendTo("#selectedEntries");
 			}
 		}
 		
@@ -101,6 +111,26 @@
 			var can = document.getElementById("canvas");
 			var context = can.getContext("2d");
 			context.clearRect(0,0,600,200);
+		}
+		
+		function addToMinute(entryid){
+			alert(entryid);
+			$("#" + entryid).hide();
+			copyEntryDataToMinute(entryid);
+			refreshMinute();
+		}
+		
+		function copyEntryDataToMinute(entryid){
+			var entry;
+			for(i = 0; i < entries.length; i++){
+				if(entries[i][3] == entryid){
+					entry = entries[i];
+					break;
+				}
+			}
+			
+			minute[minute.length] = entry;
+			
 		}
 	</script>
 </head>
@@ -195,6 +225,7 @@
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
 					Minute
+					<ul id="selectedEntries" data-role="listview"></ul>
 				</div>
 				<div class="ui-block-b">
 					Entries<br/>
