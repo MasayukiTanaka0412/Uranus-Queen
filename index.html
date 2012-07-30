@@ -4,10 +4,9 @@
 	<meta charset="UTF-8">
 	<title>Uranus-Queen: Meeting Minute Maker</title>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />     
-	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>     
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>     
 	<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>     
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
 	<script>
 		var drawFlag = false; 
 		var oldX = 0; 
@@ -53,9 +52,10 @@
 		function refreshMinute(){
 			$("#selectedEntries").empty();
 			for(i=0; i < minute.length; i++){
-				var entryhtml = '<hr/><div id="minute-' + minute[i][3] + '">&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Up</a>&nbsp;&nbsp;<a href="#">Down</a><br/><img src="' + minute[i][1] + '"/><br/>&nbsp;&nbsp;&nbsp;&nbsp;' + minute[i][2] + ' ' + minute[i][0] + '</div>'
+				var entryhtml = '<hr/><div id="minute-' + minute[i][3] + '"><br/><img src="' + minute[i][1] + '"/><br/>&nbsp;&nbsp;&nbsp;&nbsp;' + minute[i][2] + ' ' + minute[i][0] + '</div>'
 				$("<li></li>").html(entryhtml).appendTo("#selectedEntries");
 			}
+			$('.sortable').sortable();
 		}
 		
 		$("#CreateMinute").live("pageinit", loadEntries);
@@ -224,7 +224,11 @@
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
 					Minute<br/><br/><br/>
-					<ul id="selectedEntries" data-role="listview"></ul>
+					<ul id="selectedEntries" data-role="listview" class="sortable"></ul>
+					<script src="jquery.sortable.js"></script>
+					<script>
+					    $('.sortable').sortable();
+					</script>
 					<br/><br/><br/>
 				</div>
 				<div class="ui-block-b">
