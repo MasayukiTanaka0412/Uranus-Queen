@@ -126,6 +126,20 @@
 			removeEntryDataFromMinute(entryid)
 		}
 		
+		function removeEntryDataFromMinute(entryid){
+			$("#minute-" + entryid).remove();
+			syncMinuteData();
+		}
+		
+		function syncMinuteData(){
+			//TODO
+			$.each($("#selectedEntries > *"), function(){
+				alert(this);
+				//extract entryID
+				//
+			})
+		}
+		
 		function copyEntryDataToMinute(entryid){
 			var entry;
 			for(i = 0; i < entries.length; i++){
@@ -144,7 +158,6 @@
 			for(i=0; i < attendees.length; i++){
 				$('<span></span>').html('<input type="radio" id="attendee' + attendees[i] + '" name="Attendee" value="' + attendees[i] + '"  /><label for="attendee' + attendees[i] +'">' + attendees[i] + '</label>').appendTo('#attendeeButtons');
 			}
-			//$('#AddEntries').page();
 		}
 	</script>
 </head>
