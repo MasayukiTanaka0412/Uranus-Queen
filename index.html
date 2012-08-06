@@ -64,22 +64,38 @@
 		
 		window.addEventListener("load", function(){     
 			var can = document.getElementById("canvas");
-			can.addEventListener("mousemove", draw, true); 
+			//can.addEventListener("mousemove", draw, true); 
+			can.addEventListener("touchmove", draw, true);
+			
+			/*
 			can.addEventListener("mousedown", function(e){
 				drawFlag = true;
 				var rect = e.target.getBoundingClientRect();
 				oldX = e.clientX  - rect.left;
 				oldY = e.clientY  - rect.top;}, false);
+			*/
+			can.addEventListener("touchstart", function(e){
+				drawFlag = true;
+				var rect = e.target.getBoundingClientRect();
+				oldX = e.touches[0].pageX  - rect.left;
+				oldY = e.touches[0].pageY  - rect.top;}, false);
+			
+			/*	
 			can.addEventListener("mouseup", function(){
+				drawFlag = false;
+				}, false);
+			*/
+			can.addEventListener("touchend", function(){
 				drawFlag = false;
 				}, false);
 			}, true); 
 		
 		function draw(e){
 			if (!drawFlag) return;
+			e.preventDefault();
 			var rect = e.target.getBoundingClientRect();
-			var x = e.clientX - rect.left;
-			var y = e.clientY - rect.top;
+			var x = e.touches[0].pageX - rect.left;
+			var y = e.touches[0].pageY - rect.top;
 			var can = document.getElementById("canvas");
 			var context = can.getContext("2d");
 			context.strokeStyle  = "#000000";
@@ -186,6 +202,8 @@
 			}
 		}
 	</script>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon" />
 </head>
 <body>
 	<div data-role="page" id="index">   
