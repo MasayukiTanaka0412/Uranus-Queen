@@ -132,12 +132,23 @@
 		}
 		
 		function syncMinuteData(){
-			//TODO
+			var newMinute = new Array();
 			$.each($("#selectedEntries > *"), function(){
-				alert(this);
-				//extract entryID
-				//
+				var re = new RegExp("minute\-[0-9a-f]+\-[0-9a-f]+\-[0-9a-f]+\-[0-9a-f]+\-[0-9a-f]+");
+				entryidArr = this.innerHTML.match(re);
+				if(entryidArr != null){
+					entryid = entryidArr[0].substr(7);
+					alert(entryid);
+					for(i = 0; i < entries.length; i++){
+						if(entries[i][3] == entryid){
+							entry = entries[i];
+							break;
+						}
+					}
+					newMinute[newMinute.length] = entry;
+				}
 			})
+			minute = newMinute;
 		}
 		
 		function copyEntryDataToMinute(entryid){
