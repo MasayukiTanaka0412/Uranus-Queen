@@ -60,6 +60,7 @@
 		
 		$("#CreateMinute").live("pageinit", loadEntries);
 		$("#AddEntries").live("pagebeforecreate", loadAttendees);
+		$("#Publish").live("pagebeforecreate", loadMinute);
 		
 		window.addEventListener("load", function(){     
 			var can = document.getElementById("canvas");
@@ -138,7 +139,7 @@
 				entryidArr = this.innerHTML.match(re);
 				if(entryidArr != null){
 					entryid = entryidArr[0].substr(7);
-					alert(entryid);
+					
 					for(i = 0; i < entries.length; i++){
 						if(entries[i][3] == entryid){
 							entry = entries[i];
@@ -168,6 +169,20 @@
 			var attendees = $("#attendees").val().split(",");
 			for(i=0; i < attendees.length; i++){
 				$('<span></span>').html('<input type="radio" id="attendee' + attendees[i] + '" name="Attendee" value="' + attendees[i] + '"  /><label for="attendee' + attendees[i] +'">' + attendees[i] + '</label>').appendTo('#attendeeButtons');
+			}
+		}
+		
+		function loadMinute(){			
+			syncMinuteData();
+			
+			$("#lblMeetingTitle").text($("#meetingTitle").val());
+			$("#lblDateAndTime").text($("#DateAndTime").val());
+			$("#lblVenue").text($("#venue").val());
+			$("#lblAttendees").text($("#attendees").val());
+			
+			for(i=0; i < minute.length; i++){
+				var entryhtml = '<div><img src="' + minute[i][1] + '"/><br/>&nbsp;&nbsp;&nbsp;&nbsp;' + minute[i][2] + ' ' + minute[i][0] + ' ' + minute[i][4] +' </div>'
+				$("<li></li>").html(entryhtml).appendTo("#minuteErtries");
 			}
 		}
 	</script>
@@ -279,6 +294,24 @@
 					<br/><br/><br/>
 				</div>
 			</div>
+			<a href="#Publish" data-role="button" data-icon="arrow-r" data-iconpos="right">Publish</a>
+		</div>   
+		<div data-role="footer">     
+			<h4>&copy; 2012 Masayuki Tanaka</h4>   
+		</div> 
+	</div>
+	
+	<div data-role="page" id="Publish">   
+		<div data-role="header">
+			<h1>Minute</h1>   
+		</div>   
+		
+		<div data-role="content">     
+			Meeting Title: <div id="lblMeetingTitle"></div><br/>
+			Date:<div id="lblDateAndTime"></div><br/>
+			Venue:<div id="lblVenue"></div><br/>
+			Attendee:<div id="lblAttendees"></div><br/>
+			<ul id="minuteErtries" data-role="listview"></ul>
 		</div>   
 		<div data-role="footer">     
 			<h4>&copy; 2012 Masayuki Tanaka</h4>   
