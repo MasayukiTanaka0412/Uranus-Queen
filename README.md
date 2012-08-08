@@ -4,6 +4,7 @@ Uranus-Queen
 Meeting minute creating app
 
 Useage
+
 1. Set Meeting Info(Title, Date, Venue and Attendees. Attendees should be comma separated)
 
 2. Add comment by handwriting.
@@ -24,3 +25,8 @@ Useage
 
 10. Click Publish will show the minute<br/>if you open the site with <a href="http://itunes.apple.com/jp/app/save2pdf-for-ipad/id399758218?mt=8">Save2PDF</a>, you can export the minute as PDF 
 
+Contact
+
+Twitter: <a href="https://twitter.com/TwoOClockHigh">@TwoOClockHigh</a>
+
+Mail: masayuki.tanaka.0412@gmail.com
