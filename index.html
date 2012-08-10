@@ -186,6 +186,11 @@
 			for(i=0; i < attendees.length; i++){
 				$('<span></span>').html('<input type="radio" id="attendee' + attendees[i] + '" name="Attendee" value="' + attendees[i] + '"  /><label for="attendee' + attendees[i] +'">' + attendees[i] + '</label>').appendTo('#attendeeButtons');
 			}
+			
+			var agendaItem = $("#agenda").val().split("\n");
+			for(i=0; i< agendaItem.length; i++){
+				$('<option></option>').html(agendaItem[i]).appendTo('#agendaList');
+			}
 		}
 		
 		function loadMinute(){			
@@ -245,6 +250,10 @@
 				<label for="attendees">Attendees (Comma Separated)</label>
 				<input type="text" id="attendees" name="attendees" value="" ><br/>
 			</div>
+			<div data-role="fieldcontain">
+				<label for="agenda">Agenda</label>
+				<textarea name="agenda" id="agenda"></textarea>
+			</div>
 			<a href="#AddEntries" data-role="button" data-icon="arrow-r" data-iconpos="right">Start Meeting</a>
 		</div>  
 		<div data-role="footer">     
@@ -258,6 +267,9 @@
 		</div>   
 		
 		<div data-role="content">
+		<select name="agendaList" id="agendaList">
+			   <option value="Agenda">Agenda</option>
+		</select><br/>
 		Write Comment here
 			<div style="border: solid 1px Black; width:600px">
 				<canvas id="canvas" width="600" height="200">Canvas is not supported</canvas>
