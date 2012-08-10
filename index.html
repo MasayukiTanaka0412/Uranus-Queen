@@ -61,6 +61,7 @@
 		$("#CreateMinute").live("pageinit", loadEntries);
 		$("#AddEntries").live("pagebeforecreate", loadAttendees);
 		$("#Publish").live("pagebeforecreate", loadMinute);
+		$("#agendaList").live("change", setAgenda);
 		
 		window.addEventListener("load", function(){     
 			var can = document.getElementById("canvas");
@@ -107,6 +108,14 @@
 			context.closePath();
 			oldX = x;
 			oldY = y; 
+		}
+		
+		function setAgenda(){
+			var can = document.getElementById("canvas");
+			var context = can.getContext("2d");
+			
+			context.font = "18pt Arial";
+ 			context.fillText($("#agendaList").val(), 10, 50);  
 		}
 		
 		function addComment(){
